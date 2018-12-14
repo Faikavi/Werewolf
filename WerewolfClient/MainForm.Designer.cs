@@ -59,6 +59,8 @@
             this.LBPeriod = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.SignOutbtn = new System.Windows.Forms.Button();
+            this.BtnLeaveGame = new System.Windows.Forms.Button();
             this.GBPlayers.SuspendLayout();
             this.GBChat.SuspendLayout();
             this.GBAction.SuspendLayout();
@@ -429,11 +431,33 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Day #";
             // 
+            // SignOutbtn
+            // 
+            this.SignOutbtn.Location = new System.Drawing.Point(129, -4);
+            this.SignOutbtn.Name = "SignOutbtn";
+            this.SignOutbtn.Size = new System.Drawing.Size(75, 23);
+            this.SignOutbtn.TabIndex = 9;
+            this.SignOutbtn.Text = "Sign Out";
+            this.SignOutbtn.UseVisualStyleBackColor = true;
+            this.SignOutbtn.Click += new System.EventHandler(this.BtnSignOut_Click);
+            // 
+            // BtnLeaveGame
+            // 
+            this.BtnLeaveGame.Location = new System.Drawing.Point(261, 0);
+            this.BtnLeaveGame.Name = "BtnLeaveGame";
+            this.BtnLeaveGame.Size = new System.Drawing.Size(146, 19);
+            this.BtnLeaveGame.TabIndex = 10;
+            this.BtnLeaveGame.Text = "Leave Game";
+            this.BtnLeaveGame.UseVisualStyleBackColor = true;
+            this.BtnLeaveGame.Click += new System.EventHandler(this.BtnLeaveGame_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 508);
+            this.Controls.Add(this.BtnLeaveGame);
+            this.Controls.Add(this.SignOutbtn);
             this.Controls.Add(this.GBStatus);
             this.Controls.Add(this.GBAction);
             this.Controls.Add(this.GBChat);
@@ -483,6 +507,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button BtnAction;
+        private System.Windows.Forms.Button SignOutbtn;
+        private System.Windows.Forms.Button BtnLeaveGame;
     }
 }
 

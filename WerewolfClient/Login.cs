@@ -18,6 +18,7 @@ namespace WerewolfClient
         {
             InitializeComponent();
             _mainForm = MainForm;
+            
         }
 
         public void Notify(Model m)
