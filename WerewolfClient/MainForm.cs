@@ -26,6 +26,7 @@ namespace WerewolfClient
         private string _myRole;
         private bool _isDead;
         private List<Player> players = null;
+        public Form _loginForm;
         public MainForm()
         {
             InitializeComponent();
@@ -146,6 +147,14 @@ namespace WerewolfClient
                 WerewolfModel wm = (WerewolfModel)m;
                 switch (wm.Event)
                 {
+                    case EventEnum.LeaveGame:
+                        BtnJoin.Visible = true;
+                        EnableButton(BtnJoin, true);
+                        break;
+                    case EventEnum.SignIn:
+                        BtnJoin.Visible = true;
+                        EnableButton(BtnJoin, true);
+                        break;
                     case EventEnum.JoinGame:
                         if (wm.EventPayloads["Success"] == WerewolfModel.TRUE)
                         {
@@ -163,6 +172,9 @@ namespace WerewolfClient
                     case EventEnum.GameStopped:
                         AddChatMessage("Game is finished, outcome is " + wm.EventPayloads["Game.Outcome"]);
                         _updateTimer.Enabled = false;
+                        wm.ResetGame();
+                        BtnJoin.Visible = true;
+                        EnableButton(BtnJoin, true);
                         break;
                     case EventEnum.GameStarted:
                         players = wm.Players;
@@ -398,6 +410,27 @@ namespace WerewolfClient
                 TbChatInput.Text = "";
                 controller.ActionPerformed(wcmd);
             }
+        }
+
+        private void BtnSignOut_Click(object sender, EventArgs e)
+        {
+            WerewolfCommand wcmd = new WerewolfCommand();
+            wcmd.Action = WerewolfCommand.CommandEnum.SignOut;
+            controller.ActionPerformed(wcmd);
+            this.Visible = false;
+            _loginForm.Visible = true;
+        }
+
+        private void BtnLeaveGame_Click(object sender, EventArgs e)
+        {
+            WerewolfCommand wcmd = new WerewolfCommand();
+            wcmd.Action = WerewolfCommand.CommandEnum.LeaveGame;
+            controller.ActionPerformed(wcmd);
+        }
+
+        public void SetLoginForm(Form Login)
+        {
+            _loginForm = Login;
         }
     }
 }
