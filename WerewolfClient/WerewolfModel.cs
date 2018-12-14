@@ -58,8 +58,6 @@ namespace WerewolfClient
             Alive = 15,
             Chat = 16,
             ChatMessage = 17,
-            SignOut = 18,
-            LeaveGame = 19,
         }
         public const string ROLE_SEER = "Seer";
         public const string ROLE_AURA_SEER = "Aura Seer";
@@ -384,30 +382,6 @@ namespace WerewolfClient
             }
             NotifyAll();
         }
-
-        public void SignOut()
-        {
-            ResetGame();
-
-            _playerEP.LogoutPlayer(_player.Session);
-            _player = null;
-
-            _event = EventEnum.SignOut;
-            _eventPayloads["Success"] = FALSE;
-            NotifyAll();
-
-        }
-
-        public void LeaveGame()
-        {
-            ResetGame();
-
-            _event = EventEnum.LeaveGame;
-            _eventPayloads["Success"] = FALSE;
-            NotifyAll();
-
-        }
-
         public void SignUp(string server, string login, string password)
         {
             try
@@ -417,7 +391,7 @@ namespace WerewolfClient
                 _player = playerEP.AddPlayer(p);
 
                 Console.WriteLine(_player.Id);
-                _event = EventEnum.SignUp;
+                _event = EventEnum.SignIn;
                 _eventPayloads["Success"] = TRUE;
             } catch (Exception ex)
             {
@@ -510,19 +484,6 @@ namespace WerewolfClient
             //reset event
             _event = EventEnum.NOP;
             _eventPayloads.Clear();
-        }
-
-        public void ResetGame()
-        {
-            _game = _gameEP.GameSessionSessionIDDelete(_player.Session);
-            _game = null;
-            _roles = null;
-            _actions = null;
-            _playerRole = null;
-            _playerActions = null;
-            _currentDay = 0;
-            _currentTime = 0;
-            _isPlaying = false;
         }
     }
 }
